@@ -1,5 +1,7 @@
 # Mutations
 
+[![Build Status](https://api.travis-ci.org/cult-of-coders/mutations.svg?branch=master)](https://travis-ci.org/cult-of-coders/mutations)
+
 This is a new way to think about how you deal with mutations in Meteor. (a very opinionated way!)
 
 We go with Meteor on the road of [CQRS](https://martinfowler.com/bliki/CQRS.html) and we want to separate fully
@@ -61,6 +63,8 @@ mutation(TODO_ADD, (context, params) => {
 
 If your mutations are many, and as your app grows that would be the case, decouple them into separate files,
 based on the concern they're tackling like: `/imports/api/mutations/items.js`
+
+### Calling our mutations
 
 ```js
 // CLIENT
@@ -163,7 +167,7 @@ mutationAOP.addBefore(function permissionCheck({
     }
 })
 
-// Optionally
+// Optionally add the expect AOP to securely write methods and prevent from returning bad data
 mutationAOP.addAfter(function expectCheck({
     config,
     result
@@ -174,12 +178,13 @@ mutationAOP.addAfter(function expectCheck({
 })
 
 // file: /imports/api/mutations/aop/provider.js
-mutationAOP.addBefore(function permissionCheck({
+mutationAOP.addBefore(function provider({
     context,
     config,
     params
 }) => {
     if (config.provider == Providers.LIST) {
+        // Inject it in params, so the handler can access it from there
         params.list = Lists.findOne(listId);
     }
 })
