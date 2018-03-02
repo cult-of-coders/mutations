@@ -14,6 +14,7 @@ describe('mutate', function() {
             done();
         });
     });
+
     it('Should call the mutation with params', async function(done) {
         mutate(SOME_MUTATION_WITH_PARAMS, { title: 'DEMO' })
             .then(result => {
