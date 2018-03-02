@@ -1,4 +1,4 @@
-import { AOP } from '../lib/aop';
+import AOP from '../lib/aop';
 
 describe('AOP', function() {
     it('Should dispatch befores', function() {

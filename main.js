@@ -1,6 +1,5 @@
-import { disableDebugging } from "./lib/debug";
-import mutate from "./lib/mutate";
-import mutation from "./lib/mutations";
-import { mutateAOP, mutationAOP } from "./lib/aop";
+import wrap from './lib/wrap';
+import Mutation from './lib/mutation.class';
+import './lib/debug';
 
-export { mutation, mutate, disableDebugging, mutateAOP, mutationAOP };
+export { Mutation, wrap };
