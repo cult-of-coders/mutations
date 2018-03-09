@@ -108,27 +108,27 @@ The beauty of this package is that it allows you to hook into the befores and af
 For example:
 
 ```js
-import { Mutations } from 'meteor/cultofcoders:mutations';
+import { Mutation } from 'meteor/cultofcoders:mutations';
 
 // Runs 1st
-Mutations.addBeforeCall(({ config, params }) => {
+Mutation.addBeforeCall(({ config, params }) => {
     // Do something before calling the mutation (most likely on client)
 });
 
 // Runs 2nd
-Mutations.addBeforeExecution(({ context, config, params }) => {
+Mutation.addBeforeExecution(({ context, config, params }) => {
     // Do something before executing the mutation (most likely on server)
     // Maybe run some checks based on some custom configs ?
 });
 
 // Runs 3rd
-Mutations.addAfterExecution(({ context, config, params, result, error }) => {
+Mutation.addAfterExecution(({ context, config, params, result, error }) => {
     // Do something after mutation has been executed (most likely on server)
     // You could log the errors and send them somewhere?
 });
 
 // Runs 4th
-Mutations.addAfterCall(({ config, params, result, error }) => {
+Mutation.addAfterCall(({ config, params, result, error }) => {
     // Do something after response has been returned (most likely on client)
     // Maybe do some logging or dispatch an event? Maybe useful with Redux?
 });
@@ -161,7 +161,7 @@ export const todoAdd = wrap({
 
 ```js
 // file: /imports/api/mutations/aop/permissions.js
-Mutations.addBeforeExecution(function permissionCheck({
+Mutation.addBeforeExecution(function permissionCheck({
     context,
     config,
     params
@@ -176,7 +176,7 @@ Mutations.addBeforeExecution(function permissionCheck({
 })
 
 // Optionally add the expect AOP to securely write methods and prevent from returning bad data
-Mutations.addAfterExecution(function expectCheck({
+Mutation.addAfterExecution(function expectCheck({
     config,
     result
 }) {
@@ -186,7 +186,7 @@ Mutations.addAfterExecution(function expectCheck({
 })
 
 // file: /imports/api/mutations/aop/provider.js
-Mutations.addBeforeExecution(function provider({
+Mutation.addBeforeExecution(function provider({
     context,
     config,
     params
